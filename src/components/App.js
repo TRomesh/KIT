@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import Login from './login/login';
+import Account from './account/account';
+import Chat from './chat/chat';
+import Navigation from './navigation/navigation';
+import { BrowserRouter as Router, Route} from "react-router-dom";
 
 
 class App extends Component {
