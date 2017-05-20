@@ -18,20 +18,23 @@ const style = {
 class Recivedmessages extends Component {
   render() {
     return (
+      <div>
       <ListItem
         disabled={true}
-        primaryText="Stewie Griffn"
+        primaryText={this.props.user}
         secondaryText={
           <p>
-          <span style={{color:orangeA700}}>Brendan Lim</span> --
-          I&apos;ll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
+          <span style={{color:orangeA700}}>{this.props.created}</span> --
+          {this.props.message}
         </p>
         }
       leftAvatar={
-        <Avatar src="http://vignette3.wikia.nocookie.net/simpsons/images/5/5e/Stewie_griffin_by_mighty355-d7u8ws6.png/revision/latest?cb=20161111175109" />
+        <Avatar src={this.props.image} />
       }
       secondaryTextLines={4}
     />
+    <Divider/>
+  </div>
     );
   }
 }
