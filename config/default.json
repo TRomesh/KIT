@@ -1,0 +1,12 @@
+{
+  "App": {
+    "dbConfig": {
+      "host": "localhost",
+      "port": 27017,
+      "dbName": "kit"
+    },
+    "secret": {
+      "key": "s1wwewfewdvddsko232ew32wqsxwfcvccsd",
+    }
+  }
+}
