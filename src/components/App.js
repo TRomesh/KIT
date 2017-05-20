@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Login from './login/login';
-import Account from './account/account';
+import Registration from './registration/registration';
 import Chat from './chat/chat';
+import Account from './account/account';
 import Navigation from './navigation/navigation';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -14,7 +15,9 @@ class App extends Component {
     return (
       <MuiThemeProvider>
       <div>
-        <Chat/>
+        <div>
+          <Account/>
+        </div>
       </div>
       </MuiThemeProvider>
     );
