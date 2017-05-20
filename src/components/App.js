@@ -14,12 +14,6 @@ class App extends Component {
     return (
       <MuiThemeProvider>
       <div>
-        {/* <div>
-          <h2>Keep In Touch</h2>
-        </div>
-        <p >
-          Keep In Touch Chat Application
-        </p> */}
         <Chat/>
       </div>
       </MuiThemeProvider>

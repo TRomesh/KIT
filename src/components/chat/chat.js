@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
+import Message from './message';
+import Messagebox from './messagebox';
+import Previousmessages from './previousmessages';
+import Leftsidebar from './leftsidebar';
 
 const style = {
   height: 100,
@@ -15,7 +19,7 @@ class Chat extends Component {
   render() {
     return (
     <div>
-     <Paper style={style} zDepth={1} />
+      <Leftsidebar/>
     </div>
     );
   }
