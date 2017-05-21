@@ -27,6 +27,12 @@ const style3 = {
   marginTop: 50,
 };
 
+const imgstyle = {
+  height: 240,
+  width: 200,
+  marginTop: 15,
+};
+
 const styles = {
   root: {
     display: 'flex',
@@ -83,7 +89,7 @@ class Account extends Component {
           <Paper style={style1} zDepth={1} className="column">
             <Card style={style} className="col-md-1">
               <CardMedia>
-                <img src="https://s-media-cache-ak0.pinimg.com/originals/87/8d/b1/878db1dfedbadae5846882fad98d7c9f.png"/>
+                <img style={imgstyle} src="http://aurora-awards.com/wp-content/uploads/2017/05/girls-hd-images-cute-girl-hd-wallpaper-cnmuqi.jpg"/>
               </CardMedia>
             </Card>
             <div className="col-md-6" style={style2}>
