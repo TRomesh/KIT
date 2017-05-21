@@ -27,7 +27,7 @@ class Previousmessages extends Component {
         </p>
         }
       leftAvatar={
-        <Avatar src="http://vignette3.wikia.nocookie.net/simpsons/images/5/5e/Stewie_griffin_by_mighty355-d7u8ws6.png/revision/latest?cb=20161111175109" />
+        <Avatar src={this.props.image} />
       }
       secondaryTextLines={1}
     />
