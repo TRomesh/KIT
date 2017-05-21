@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import Paper from 'material-ui/Paper';
 import {blueGrey50,lightBlue500} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
@@ -30,7 +31,11 @@ class Registration extends Component {
      super(props,contex);
 
        this.state = {
-
+         fname:'',
+         lname:'',
+         uname:'',
+         email:'',
+         password:''
        }
   }
 
@@ -44,18 +49,22 @@ class Registration extends Component {
     //return !_.isEmpty(value);
   };
 
+  singup=()=>{
+    this.setState({fname:'',lname:'',uname:'',email:'',password:''});
+  }
+
   render() {
     return (
       <div>
         <Paper style={style} zDepth={2}>
           <h1 style={style1}><center>Sign Up</center></h1>
-          <TextField hintText="First name" floatingLabelText="First name"/>
-          <TextField hintText="Last name" floatingLabelText="Last name"/>
-          <TextField hintText="Username" floatingLabelText="Username"/>
-          <TextField hintText="Email" floatingLabelText="Email"/>
-          <TextField hintText="Password" floatingLabelText="Password" type="password"/>
+          <TextField hintText="First name" floatingLabelText="First name" onChange={e=>{this.setState({fname:e.target.value})}}/>
+          <TextField hintText="Last name" floatingLabelText="Last name" onChange={e=>{this.setState({lname:e.target.value})}}/>
+          <TextField hintText="Username" floatingLabelText="Username" onChange={e=>{this.setState({uname:e.target.value})}}/>
+          <TextField hintText="Email" floatingLabelText="Email" onChange={e=>{this.setState({email:e.target.value})}}/>
+          <TextField hintText="Password" floatingLabelText="Password" type="password" onChange={e=>{this.setState({password:e.target.value})}}/>
           <br/><br/>
-          <RaisedButton label="Sign Up" primary={true} style={style2} />
+          <RaisedButton label="Sign Up" primary={true} style={style2} onTouchTap={this.singup}/>
         </Paper>
       </div>
     );

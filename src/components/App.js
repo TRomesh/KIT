@@ -16,7 +16,7 @@ class App extends Component {
       <MuiThemeProvider>
       <div>
         <div>
-          <Account/>
+          <Registration/>
         </div>
       </div>
       </MuiThemeProvider>
