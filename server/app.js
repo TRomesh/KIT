@@ -1,10 +1,8 @@
-
 const app = require('express')();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const config = require('config');
 const approutes = require('./routes/AppRoutes');
 const messageroutes = require('./routes/MessageRoutes');
 const userroutes = require('./routes/UserRoutes');
@@ -12,7 +10,9 @@ const userroutes = require('./routes/UserRoutes');
 
 const port = process.env.PORT || 3030;
 
-// let dbConfig = config.get('App.dbConfig');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/kit');
+
 let onlineUsers = [];
 let sockets = {};
 

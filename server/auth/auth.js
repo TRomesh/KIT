@@ -1,7 +1,6 @@
 const jwt = require('jwt-simple');
 const bcrypt = require('bcrypt-nodejs');
-const config = require('config');
-// let secret = config.get('App.secret');
+
 const User = require('../models/user.model');
 
 let tokenForUser = (user) =>{

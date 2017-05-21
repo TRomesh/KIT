@@ -3,8 +3,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
 const User = require('../models/user.model');
-const config = require('config');
-// let secret = config.get('App.secret');
+
 
 // Create local strategy
 const localOptions = { usernameField: 'email' };
