@@ -11,10 +11,10 @@ export function signUp(login, password) {
       dataType: 'json',
       contentType: 'application/json',
       data: JSON.stringify(data),
-      url: 'http://localhost:3000/registration'
+      url: 'http://localhost:3000/signup'
     }).then(data => {
       console.log('received data', data);
-      dispatch(signUpSuccessful(data));
+      dispatch(data);
     }).catch(err => {
       console.log('err', err);
     });
@@ -33,9 +33,9 @@ export function signIn(login, password) {
       dataType: 'json',
       contentType: 'application/json',
       data: JSON.stringify(data),
-      url: 'http://localhost:3000/authorization'
+      url: 'http://localhost:3000/signin'
     }).then(data => {
-      dispatch(signInSuccessful(data));
+      dispatch(data);
     }).catch(err => {
       console.log('err', err);
     });

@@ -5,7 +5,9 @@ const io = require('socket.io')(server);
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const config = require('config');
-const router = require('./router');
+const approutes = require('./routes/AppRoutes');
+const messageroutes = require('./routes/MessageRoutes');
+const userroutes = require('./routes/UserRoutes');
 
 
 const port = process.env.PORT || 3030;
@@ -19,14 +21,8 @@ app.use(bodyParser.urlencoded({
    extended:true
 }));
 
-router(app);
+approutes(app);
+messageroutes(app);
+userroutes(app);
 
 server.listen(port,()=>{console.log('App running on port :'+port)});
-
-app.get('/user',(req, res, next) => {
-  res.json({"message": "Hello world!"});
-});
-
-app.post('/user',(req, res, next) => {
-  res.json({"message": "Hello world!"});
-});

@@ -1,4 +1,4 @@
-import {SEND_MESSAGE, GET_MESSAGE, ROOM_USER_LIST_UPDATE} from '../constants/chat';
+import {SEND_MESSAGE, GET_MESSAGE, ROOM_USER_LIST_UPDATE} from '../constants/message';
 
 const initialState = {
   messages: []
