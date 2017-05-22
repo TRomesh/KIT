@@ -1,4 +1,5 @@
-import { SIGN_UP_REQUEST, SIGN_IN_REQUEST } from '../constants/user';
+import { SIGN_UP_REQUEST, SIGN_IN_REQUEST, GET_USER_DETAILS, UPDATE_USER_DETAILS } from '../constants/user';
+
 import axios from 'axios';
 
 export const signUp=(userdata)=>{
@@ -7,8 +8,10 @@ export const signUp=(userdata)=>{
         userdata
       )
       .then((data)=>{
-        console.log('user successfuly added',data);
-        // dispatch(data);
+        return ({
+            type: SIGN_UP_REQUEST,
+            data:data
+        });
       })
       .catch((error)=>{
         console.log('err', error);
@@ -25,7 +28,10 @@ export const signIn=(credentials)=>{
       .then((data)=>{
         console.log('token recived from server',data.data);
         localStorage.setItem('jwtToken', data.data.token);
-        // dispatch(data);
+        return ({
+            type: SIGN_IN_REQUEST,
+            data:data.data
+        });
       })
       .catch((error)=>{
         console.log('err', error);
@@ -39,7 +45,10 @@ export const getUserDetails=(email)=>{
       )
       .then((data)=>{
         console.log(data);
-        //dispatch(data);
+        return ({
+            type: GET_USER_DETAILS,
+            user:data.data
+        });
       })
       .catch((error)=>{
         console.log('err', error);
@@ -54,7 +63,10 @@ export const updateUserDetails=(user)=>{
       )
       .then((data)=>{
         console.log(data);
-        //dispatch(data);
+        return ({
+            type: UPDATE_USER_DETAILS,
+            user:data.data
+        });
       })
       .catch((error)=>{
         console.log('err', error);

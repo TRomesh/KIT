@@ -6,13 +6,6 @@ import ListItem from 'material-ui/List/ListItem';
 import Divider from 'material-ui/Divider';
 import {grey600,orangeA700} from 'material-ui/styles/colors';
 
-const style = {
-  height: 100,
-  width: 100,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block'
-};
 
 
 class Recivedmessages extends Component {
@@ -31,7 +24,7 @@ class Recivedmessages extends Component {
       leftAvatar={
         <Avatar src={this.props.image} />
       }
-      secondaryTextLines={4}
+      secondaryTextLines={2}
     />
     <Divider/>
   </div>

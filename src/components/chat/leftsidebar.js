@@ -8,6 +8,11 @@ import Subheader from 'material-ui/Subheader';
 import {grey100} from 'material-ui/styles/colors';
 import Previousmessages from './previousmessages';
 
+const style = {
+  padding:0,
+  height:500,
+  overflow:'auto'
+};
 
   let messages = [
     {uname:'Tharaka',created:'2017-05-20',message:'Hello',image:'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAIcAAAAJDc0ZDdkNjViLTFmNDEtNGQ4Zi04YmNlLWFkMzZjYjBjMTNhNg.jpg'},
@@ -36,9 +41,11 @@ class Leftsidebar extends Component {
          <div style={{backgroundColor:grey100}}>
            <TextField hintText="Search" style={{padding:'15px'}}/>
          </div>
+         <div style={style}>
          {
            this.previousmessages()
          }
+         </div>
        </List>
     </Paper>
     );
