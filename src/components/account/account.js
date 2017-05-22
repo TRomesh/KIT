@@ -5,6 +5,11 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import TextField from 'material-ui/TextField';
+import Dropzone from 'react-dropzone'
 
 const style = {
   height: 270,
@@ -12,10 +17,16 @@ const style = {
   margin: 30,
 };
 
+const previewStyle = {
+    width: 196
+};
+
 const style1 = {
   height: 350,
-  width: 1220,
-  margin: 20,
+  width: 1000,
+  marginTop: 20,
+  marginBottom:20,
+  marginLeft:80,
   padding: 7,
 };
 
@@ -25,6 +36,18 @@ const style2 = {
 
 const style3 = {
   marginTop: 50,
+};
+
+const style4 = {
+  marginLeft: 150,
+};
+
+const style5 = {
+  marginLeft: 15,
+};
+
+const style6 = {
+  marginLeft: 240,
 };
 
 const imgstyle = {
@@ -44,6 +67,12 @@ const styles = {
     height: 450,
     overflowY: 'auto',
   },
+};
+
+const gridList = {
+    width: 350,
+    height: 270,
+    overflowY: 'auto',
 };
 
 const tilesData = [
@@ -82,21 +111,81 @@ const tilesData = [
 ];
 
 class Account extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      editingPic: false,
+      editingProfile: false,
+    };
+  }
+
   render() {
     return (
       <div className="row">
         <div style={style1}>
           <Paper style={style1} zDepth={1} className="column">
-            <Card style={style} className="col-md-1">
-              <CardMedia>
-                <img style={imgstyle} src="http://aurora-awards.com/wp-content/uploads/2017/05/girls-hd-images-cute-girl-hd-wallpaper-cnmuqi.jpg"/>
-              </CardMedia>
-            </Card>
+            <IconMenu
+              iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+              targetOrigin={{horizontal: 'right', vertical: 'top'}}
+              style={style4}
+              >
+              <MenuItem primaryText="Edit" />
+            </IconMenu>
+            <div>
+            {
+                this.state.editingPic ? <div className="col-sm-1 col-md-1 col-lg-1">
+                    <Dropzone onDrop={this.onDrop} multiple={false} accept="image/*">
+                        <div>Try dropping some files here, or click to select files to upload.</div>
+                        <img style={previewStyle} src={this.state.preview} />
+                    </Dropzone>
+                    {this.renderSave()}
+
+                    </div> : <div className="col-sm-1 col-md-1 col-lg-1">
+
+                              <GridList
+                                cellHeight={200}
+                                style={gridList}
+                              >
+                                <GridTile>
+                                  <img src={'http://aurora-awards.com/wp-content/uploads/2017/05/girls-hd-images-cute-girl-hd-wallpaper-cnmuqi.jpg'} />
+                                </GridTile>
+                              </GridList>
+
+                          </div>
+            }
+            </div>
+
             <div className="col-md-6" style={style2}>
-              <h3><b>Moana Fernando</b></h3>
-              <h5>moana@gmail.com</h5>
-              <h5>age</h5>
-              <h5>Colombo</h5>
+
+              <h2><b> {this.state.editingProfile ? <div className="col-md-1"><TextField
+                                  ref="firstname" hintText="firstname" defaultValue={this.props.firstname}
+                                  errorText={this.state.firstnameerr} />
+                            </div> : 'FirstName'}
+
+                                  { ' ' }
+
+                                   {this.state.editingProfile ? <div className="col-md-4" style={style6}><TextField
+                                    ref="lastname" hintText="lastname" defaultValue={this.props.lastname}
+                                    errorText={this.state.lastnameerr} />
+                            </div> : 'LastName'} </b></h2><br/>
+
+
+              <h4>{this.state.editingProfile ? <div style={style5}><TextField
+                                  ref="username" hintText="username" defaultValue={this.props.username}
+                                  errorText={this.state.usernameerr} />
+                            </div> : 'Username'}</h4>
+
+              <h4>{this.state.editingProfile ? <div style={style5}><TextField
+                                  ref="age" hintText="age" defaultValue={this.props.age}
+                                  errorText={this.state.ageerr} />
+                            </div> : 'age'}</h4>
+
+              <h4>{this.state.editingProfile ? <div style={style5}><TextField
+                                  ref="city" hintText="city" defaultValue={this.props.city}
+                                  errorText={this.state.cityerr} />
+                            </div> : 'city'}</h4>
             </div>
           </Paper>
         </div>
