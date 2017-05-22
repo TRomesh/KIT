@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
 const message = new Schema({
-    uname:String,
+    sender:String,
     message:String,
-    seen:Boolean,
+    thread:String,
     created:{ type: Date, default: Date.now }
 });
 

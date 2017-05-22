@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import UserActions from '../../actions/UserActions';
 import Paper from 'material-ui/Paper';
-import {blueGrey50,lightBlue500} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import {signIn} from '../../actions/UserActions';
+import {blueGrey50,lightBlue500} from 'material-ui/styles/colors';
 
 const style = {
   height: 350,
@@ -27,33 +28,43 @@ const style2 = {
 };
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: ''
-    };
+    constructor(props) {
+      super(props);
+      this.state = {
+        email: '',
+        password: '',
+        loading:false
+      };
 
-  }
+    }
 
-  singin=()=>{
-    this.setState({email: '',password: ''});
-  }
+    singin=()=>{
+        console.log('signing in');
+      this.setState({loading:true});
+      signIn({email:this.state.email,password:this.state.password});
+      this.setState({email: '',password: '',loading:true});
+      console.log('done sending to actions');
+    }
 
-  render() {
-    return (
-      <div>
-        <Paper style={style} zDepth={2}>
-          <h1 style={style1}><center>Sign In</center></h1>
-          <TextField hintText="Email" floatingLabelText="Email" onChange={e=>{this.setState({email:e.target.value})}}/>
-          <TextField hintText="Password" floatingLabelText="Password" type="password" onChange={p=>{this.setState({password:p.target.value})}}/>
-          <br/><br/>
-          <RaisedButton label="Sign In" primary={true} style={style2} onTouchTap={this.singin}/>
-        </Paper>
-      </div>
-    );
-  }
+    render() {
+      return (
+        <div>
+          <Paper style={style} zDepth={2}>
+            <h1 style={style1}><center>Sign In</center></h1>
+            <TextField hintText="Email" floatingLabelText="Email" onChange={e=>{this.setState({email:e.target.value})}}/>
+            <TextField hintText="Password" floatingLabelText="Password" type="password" onChange={p=>{this.setState({password:p.target.value})}}/>
+            <br/><br/>
+            <RaisedButton label="Sign In" primary={true} style={style2} onTouchTap={this.singin}/>
+          </Paper>
+        </div>
+      );
+    }
+}
+
+Login.PropTypes = {
+  signIn:PropTypes.func
 }
 
 
-export default Login;
+
+export default connect(null, { signIn })(Login);
