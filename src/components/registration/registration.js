@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Paper from 'material-ui/Paper';
+import PropTypes from 'prop-types';
+import {signUp} from '../../actions/UserActions';
 import {blueGrey50,lightBlue500} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -50,6 +52,7 @@ class Registration extends Component {
   };
 
   singup=()=>{
+    signUp(this.state);
     this.setState({fname:'',lname:'',uname:'',email:'',password:''});
   }
 
@@ -71,4 +74,8 @@ class Registration extends Component {
   }
 }
 
-export default Registration;
+Registration.PropTypes = {
+  signUp:PropTypes.func
+}
+
+export default connect(null, { signUp })(Registration);

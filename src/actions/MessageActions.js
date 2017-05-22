@@ -26,7 +26,6 @@ export  function updateRoomUserList(userLoginsInRoom) {
 }
 
 export const getPreviousMessages=(user)=>{
-  return dispatch => {
 
     axios.put('http://localhost:3000/message',
         user
@@ -38,12 +37,10 @@ export const getPreviousMessages=(user)=>{
       .catch((error)=>{
         console.log('err', error);
       });
-  }
 }
 
 
 export const searchMessages=(user)=>{
-  return dispatch => {
 
     axios.put('http://localhost:3000/message',
         user
@@ -55,5 +52,4 @@ export const searchMessages=(user)=>{
       .catch((error)=>{
         console.log('err', error);
       });
-  }
 }
