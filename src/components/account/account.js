@@ -320,7 +320,7 @@ class Account extends Component {
                             </div> : 'city'}</h4>
 
               <div>{this.state.editingProfile ? <div style={style5}><RaisedButton
-                                  label="Sign Up" primary={true} onTouchTap={this._saveChanges}/>
+                                  label="Save" primary={true} onTouchTap={this._saveChanges}/>
                             </div> : ''}</div>
 
             </div>
