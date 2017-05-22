@@ -6,10 +6,16 @@ import Navigation from './navigation/navigation';
 import Registration from './registration/registration';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 
 injectTapEventPlugin();
+
+let hasToken = () =>{
+  const token = localStorage.getItem('token');
+  return (token == undefined);
+}
+
 
 class App extends Component {
   render() {
@@ -22,6 +28,8 @@ class App extends Component {
             <Navigation>
               <Route exact path="/chat" component={Chat}/>
               <Route exact path="/account" component={Account}/>
+              {/* <Route exact path="/chat" render={() => (hasToken() ? (<Redirect to="/login"/>) : (<Chat />))}/>
+              <Route exact path="/account" render={() => (hasToken() ? (<Redirect to="/login"/>) : (<Account />))}/> */}
             </Navigation>
           </Switch>
         </Router>
@@ -29,5 +37,7 @@ class App extends Component {
     );
   }
 }
+
+
 
 export default App;
