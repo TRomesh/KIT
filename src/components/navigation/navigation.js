@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 class Navigation extends Component {
 
@@ -24,21 +24,25 @@ class Navigation extends Component {
       <div>
          <AppBar
            title="KIT"
-           iconElementLeft={<IconButton></IconButton>}
+           showMenuIconButton={false}
            iconElementRight={
-             <IconMenu
-              iconButtonElement={
-                <IconButton><MoreVertIcon /></IconButton>
-              }
-              targetOrigin={{horizontal: 'right', vertical: 'top'}}
-              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-            >
-              <MenuItem primaryText="Refresh" />
-              <MenuItem primaryText="Help" />
-              <MenuItem primaryText="Sign out" />
-            </IconMenu>
+             <div className="column">
+                   <FlatButton label="Home"/>
+                   <FlatButton label="Profile"/>
+                 <IconMenu
+                  iconButtonElement={
+                    <IconButton><MoreVertIcon /></IconButton>
+                  }
+                  targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                  anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                >
+                  <MenuItem primaryText="Help" />
+                  <MenuItem primaryText="Sign out" />
+                </IconMenu>
+          </div>
            }
          />
+         {this.props.children}
        </div>
     );
   }
