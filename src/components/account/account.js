@@ -248,7 +248,14 @@ class Account extends Component {
     // if(val) {
     //   ProfileActions.updateChanges(data);
     //   location.reload();
+    //   this.setState({
+    //     editingProfile: false
+    //   });
     // }
+
+    this.setState({
+        editingProfile: false
+    });
   }
 
   _cancelEditProfile = () => {
