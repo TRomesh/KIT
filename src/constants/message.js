@@ -1,3 +1,4 @@
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const GET_MESSAGE = 'GET_MESSAGE';
+export const SEARCH_MESSAGE = 'SEARCH_MESSAGE';
 export const ROOM_USER_LIST_UPDATE = 'ROOM_USER_LIST_UPDATE';

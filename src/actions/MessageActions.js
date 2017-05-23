@@ -1,29 +1,6 @@
-import { SEND_MESSAGE, GET_MESSAGE, ROOM_USER_LIST_UPDATE } from '../constants/message';
+import { SEND_MESSAGE, GET_MESSAGE, SEARCH_MESSAGE, ROOM_USER_LIST_UPDATE } from '../constants/message';
 import axios from 'axios';
 
-
-export function sendMessage(msg) {
-  return {
-    type: SEND_MESSAGE,
-    payload: msg
-  }
-}
-
-
-export function getMessage(msg) {
-  return {
-    type: GET_MESSAGE,
-    payload: msg
-  }
-}
-
-
-export  function updateRoomUserList(userLoginsInRoom) {
-  return {
-    type: ROOM_USER_LIST_UPDATE,
-    payload: userLoginsInRoom
-  }
-}
 
 export const getPreviousMessages=(user)=>{
 
@@ -32,7 +9,10 @@ export const getPreviousMessages=(user)=>{
       )
       .then((data)=>{
         console.log(data);
-        dispatch(data);
+        return {
+          type: GET_MESSAGE,
+          payload: data
+        }
       })
       .catch((error)=>{
         console.log('err', error);
@@ -47,7 +27,10 @@ export const searchMessages=(user)=>{
       )
       .then((data)=>{
         console.log(data);
-        dispatch(data);
+        return {
+          type: SEARCH_MESSAGE,
+          payload: data
+        }
       })
       .catch((error)=>{
         console.log('err', error);

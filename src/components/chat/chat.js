@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import Message from './message';
-import Messagebox from './messagebox';
 import Previousmessages from './previousmessages';
 import Leftsidebar from './leftsidebar';
+import Messagebox from './messagebox';
 import Centercontainer from './centercontainer';
 
 const style = {
-  height: 100,
-  width: 100,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
+  padding:0
 };
 
 
@@ -20,9 +16,19 @@ class Chat extends Component {
 
   render() {
     return (
-    <div>
-      <Messagebox/>
-    </div>
+      <div >
+        <div className="container row">
+            <div className="col-md-3" style={style}>
+                  <Leftsidebar/>
+            </div>
+            <Paper className="col-md-9" style={style}>
+                <div>
+                  <div><Centercontainer/></div>
+                  <div><Messagebox/></div>
+                </div>
+            </Paper>
+        </div>
+      </div>
     );
   }
 }
