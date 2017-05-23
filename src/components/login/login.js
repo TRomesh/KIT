@@ -9,14 +9,15 @@ import {blueGrey50,lightBlue500} from 'material-ui/styles/colors';
 
 const style = {
   height: 350,
-  width: 500,
-  marginLeft: 380,
+  width: 370,
+  marginLeft: 80,
   marginRight: 380,
-  marginTop: 50,
+  marginTop: 80,
   marginBottom: 50,
   textAlign: 'center',
   display: 'inline-block',
-  backgroundColor: blueGrey50
+  backgroundColor: blueGrey50,
+  paddingTop: 20,
 };
 
 const style1 = {
@@ -48,7 +49,8 @@ class Login extends Component {
 
     render() {
       return (
-        <div>
+        <div style={{backgroundImage: "url(" + "https://addmeskype.files.wordpress.com/2015/09/d62cb-teenagers-offlinle-online.jpg" + ")",
+                     width:1300, height:654}}>
           <Paper style={style} zDepth={2}>
             <h1 style={style1}><center>Sign In</center></h1>
             <TextField hintText="Email" floatingLabelText="Email" onChange={e=>{this.setState({email:e.target.value})}}/>
