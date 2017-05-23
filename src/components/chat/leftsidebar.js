@@ -11,7 +11,8 @@ import Previousmessages from './previousmessages';
 const style = {
   padding:0,
   height:500,
-  overflow:'auto'
+  overflowY: 'visible',
+  overflowX: 'hidden'
 };
 
   let messages = [
@@ -36,7 +37,7 @@ class Leftsidebar extends Component {
   render() {
     return (
     <Paper>
-       <List>
+       <List style={{padding:0}}>
          <Subheader><strong>Recent chats</strong></Subheader>
          <div style={{backgroundColor:grey100}}>
            <TextField hintText="Search" style={{padding:'15px'}}/>

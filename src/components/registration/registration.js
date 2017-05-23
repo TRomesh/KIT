@@ -8,9 +8,9 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
-  height: 560,
+  height: 554,
   width: 400,
-  marginLeft: 250,
+  marginLeft: 200,
   marginRight: 380,
   marginTop: 50,
   marginBottom: 50,

@@ -6,8 +6,6 @@ import ListItem from 'material-ui/List/ListItem';
 import Divider from 'material-ui/Divider';
 import {grey600,orangeA700} from 'material-ui/styles/colors';
 
-
-
 class Recivedmessages extends Component {
   render() {
     return (

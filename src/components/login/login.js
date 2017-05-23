@@ -50,7 +50,7 @@ class Login extends Component {
     render() {
       return (
         <div style={{backgroundImage: "url(" + "https://addmeskype.files.wordpress.com/2015/09/d62cb-teenagers-offlinle-online.jpg" + ")",
-                     width:1300, height:654}}>
+                     width:1301, height:654}}>
           <Paper style={style} zDepth={2}>
             <h1 style={style1}><center>Sign In</center></h1>
             <TextField hintText="Email" floatingLabelText="Email" onChange={e=>{this.setState({email:e.target.value})}}/>

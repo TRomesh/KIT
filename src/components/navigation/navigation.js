@@ -24,6 +24,7 @@ class Navigation extends Component {
            iconStyleRight={{marginTop:0}}
            iconElementRight={
              <div className="column">
+                <Link to="/chat"><FlatButton label="Home"/></Link>
                 <Link to="/account"><FlatButton label="My Profile"/></Link>
                 <Link to="/signout"><FlatButton label="Signout"/></Link>
                 <IconMenu

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
 
 class Messagebox extends Component {
 
@@ -24,11 +25,17 @@ class Messagebox extends Component {
 
   render() {
     return (
-    <Paper zDepth={3}>
-        <div className="col-md-12" style={{paddingTop:'15px'}}><TextField className="form-group" fullWidth={true} hintText="message.." onChange={this.handleChange} rows={1}/></div>
-        <div className="col-md-10"></div>
-        <div className="col-md-2" style={{padding:'5px'}}><FlatButton label="Send" primary={true} onTouchTap={this.Sendmessage}/></div>
-    </Paper>
+      <div>
+        <Divider/>
+        <div className="column" style={{marginTop:50}}>
+          <div className="col-md-10">
+            <TextField className="form-group" fullWidth={true} hintText="message.." onChange={this.handleChange} rows={1}/>
+          </div>
+          <div className="col-md-2" style={{marginTop:'5px'}}>
+            <RaisedButton label="Send" primary={true} onTouchTap={this.Sendmessage}/>
+          </div>
+        </div>
+      </div>
     );
   }
 

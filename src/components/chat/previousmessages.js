@@ -8,13 +8,13 @@ import Avatar from 'material-ui/Avatar';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import {grey600,orangeA700} from 'material-ui/styles/colors';
 
-const style = {
-  height: 100,
-  width: 100,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
-};
+// const style = {
+//   height: 100,
+//   width: 100,
+//   margin: 20,
+//   textAlign: 'center',
+//   display: 'inline-block',
+// };
 
 class Previousmessages extends Component {
 
