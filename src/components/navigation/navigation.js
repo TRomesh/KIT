@@ -20,7 +20,7 @@ class Navigation extends Component {
   }
 
   render() {
-    socket.emit('online',{username:localStorage.getItem("user")});
+    socket.emit('online',{username:localStorage.getItem("usr")});
     return (
       <div>
          <AppBar

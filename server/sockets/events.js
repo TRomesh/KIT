@@ -9,11 +9,13 @@ module.exports = function (io,app) {
 
         // Event for user connecting to socket
         socket.on('online', (data) => {
+          if(data.username!=null){
             socket.name = data.username;
             onlineUsers.push(data.username);
             sockets[data.username] = socket;
             // socket.emit('online', data);
-            console.log('online');
+            console.log(data.username+' online');
+          }
         });
 
 

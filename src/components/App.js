@@ -28,6 +28,7 @@ class App extends Component {
             <Navigation>
               {/* <Route exact path="/chat" component={Chat}/>
               <Route exact path="/account" component={Account}/> */}
+              <Route exact path="/" render={() => (hasToken() ? (<Redirect to="/chat"/>) : (<Chat />))}/>
               <Route exact path="/chat" render={() => (hasToken() ? (<Redirect to="/login"/>) : (<Chat />))}/>
               <Route exact path="/account" render={() => (hasToken() ? (<Redirect to="/login"/>) : (<Account />))}/>
             </Navigation>
