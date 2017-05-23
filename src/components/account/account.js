@@ -11,6 +11,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import TextField from 'material-ui/TextField';
 import Dropzone from 'react-dropzone'
 import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
 
 const style1 = {
   height: 350,
@@ -123,6 +124,11 @@ class Account extends Component {
       preview: '',
       mouseover: false,
       picture: '',
+      firstname: 'Madushika',
+      lastname: 'Perera',
+      username: 'Madu',
+      age: '23 years',
+      city: 'Colombo',
     };
   }
 
@@ -299,32 +305,32 @@ class Account extends Component {
             <div className="col-md-6" style={style2}>
 
               <h2><b> {this.state.editingProfile ? <div className="col-md-1"><TextField
-                                  ref="firstname" hintText="firstname" defaultValue={this.props.firstname}
+                                  ref="firstname" hintText="firstname" defaultValue={this.state.firstname}
                                   errorText={this.state.firstnameerr} />
-                            </div> : 'FirstName'}
+                            </div> : this.state.firstname}
 
                                   { ' ' }
 
                                    {this.state.editingProfile ? <div className="col-md-4" style={style6}><TextField
-                                    ref="lastname" hintText="lastname" defaultValue={this.props.lastname}
+                                    ref="lastname" hintText="lastname" defaultValue={this.state.lastname}
                                     errorText={this.state.lastnameerr} />
-                            </div> : 'LastName'} </b></h2><br/>
+                            </div> : this.state.lastname} </b></h2><br/>
 
 
               <h4>{this.state.editingProfile ? <div style={style5}><TextField
-                                  ref="username" hintText="username" defaultValue={this.props.username}
+                                  ref="username" hintText="username" defaultValue={this.state.username}
                                   errorText={this.state.usernameerr} />
-                            </div> : 'Username'}</h4>
+                            </div> : this.state.username}</h4>
 
-              <h4>{this.state.editingProfile ? <div style={style5}><TextField
-                                  ref="age" hintText="age" defaultValue={this.props.age}
+              <h5>{this.state.editingProfile ? <div style={style5}><TextField
+                                  ref="age" hintText="age" defaultValue={this.state.age}
                                   errorText={this.state.ageerr} />
-                            </div> : 'age'}</h4>
+                            </div> : this.state.age}</h5>
 
-              <h4>{this.state.editingProfile ? <div style={style5}><TextField
-                                  ref="city" hintText="city" defaultValue={this.props.city}
+              <h5>{this.state.editingProfile ? <div style={style5}><TextField
+                                  ref="city" hintText="city" defaultValue={this.state.city}
                                   errorText={this.state.cityerr} />
-                            </div> : 'city'}</h4>
+                            </div> : this.state.city}</h5>
 
               <div>{this.state.editingProfile ? <div style={style5}><RaisedButton
                                   label="Save" primary={true} onTouchTap={this._saveChanges}/>
@@ -339,7 +345,8 @@ class Account extends Component {
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 style={style4}
                 >
-                <MenuItem primaryText="Edit" onTouchTap={this._editProfile}/>
+                <MenuItem primaryText="Change profile picture" onTouchTap={this._editProfilePic} />
+                <MenuItem primaryText="Edit profile" onTouchTap={this._editProfile} />
               </IconMenu>
             </div>
 

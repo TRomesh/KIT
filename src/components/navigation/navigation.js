@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 class Navigation extends Component {
 
   logout=()=>{
-    
+
   }
 
   render() {
@@ -21,11 +21,12 @@ class Navigation extends Component {
          <AppBar
            title="KIT"
            showMenuIconButton={false}
+           iconStyleRight={{marginTop:0}}
            iconElementRight={
              <div className="column">
-                   <Link to="/"><FlatButton label="Home"/></Link>
-                   <Link to="/account"><FlatButton label="Account"/></Link>
-                 <IconMenu
+                <Link to="/account"><FlatButton label="My Profile"/></Link>
+                <Link to="/signout"><FlatButton label="Signout"/></Link>
+                <IconMenu
                   iconButtonElement={
                     <IconButton><MoreVertIcon /></IconButton>
                   }
@@ -33,7 +34,7 @@ class Navigation extends Component {
                   anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                 >
                   <MenuItem primaryText="Help" />
-                  <MenuItem primaryText="Log out" />
+                  <MenuItem primaryText="Settings" />
                 </IconMenu>
           </div>
            }
