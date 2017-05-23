@@ -8,7 +8,8 @@ const User = new Schema({
   lname:String,
   uname:{type:String,unique:true},
   email:{type:String,unique:true,lowercase:true},
-  password:String
+  password:String,
+  firends:[{uname:{type:String,unique:true}}]
 });
 
 // On Save Hook, encrypt password
