@@ -7,7 +7,6 @@ import Divider from 'material-ui/Divider';
 import Message from './message';
 import io from 'socket.io-client';
 
-
 const style = {
   padding:0,
   height:480,

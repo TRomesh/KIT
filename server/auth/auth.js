@@ -5,7 +5,7 @@ const User = require('../models/user.model');
 
 let tokenForUser = (user) =>{
     const timpestamp = new Date().getTime();
-    return jwt.encode({sub:user.id,iat:timpestamp},'asasasas');
+    return jwt.encode({sub:user.id,iat:timpestamp,usr:user.uname},'asasasas');
 }
 
 exports.signin = function (req, res, next) {

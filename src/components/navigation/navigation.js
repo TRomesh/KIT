@@ -8,24 +8,31 @@ import Toggle from 'material-ui/Toggle';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { Link } from 'react-router-dom';
+import io from 'socket.io-client';
+
+const socket = io.connect("http://localhost:3030");
+
 
 class Navigation extends Component {
 
   logout=()=>{
-    
+
   }
 
   render() {
+    socket.emit('online',{username:localStorage.getItem("user")});
     return (
       <div>
          <AppBar
            title="KIT"
            showMenuIconButton={false}
+           iconStyleRight={{marginTop:0}}
            iconElementRight={
              <div className="column">
-                   <Link to="/"><FlatButton label="Home"/></Link>
-                   <Link to="/account"><FlatButton label="Account"/></Link>
-                 <IconMenu
+                <Link to="/chat"><FlatButton label="Home"/></Link>
+                <Link to="/account"><FlatButton label="My Profile"/></Link>
+                <Link to="/signout"><FlatButton label="Signout"/></Link>
+                <IconMenu
                   iconButtonElement={
                     <IconButton><MoreVertIcon /></IconButton>
                   }
@@ -33,7 +40,7 @@ class Navigation extends Component {
                   anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                 >
                   <MenuItem primaryText="Help" />
-                  <MenuItem primaryText="Log out" />
+                  <MenuItem primaryText="Settings" />
                 </IconMenu>
           </div>
            }

@@ -8,9 +8,9 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
-  height: 560,
-  width: 500,
-  marginLeft: 380,
+  height: 554,
+  width: 400,
+  marginLeft: 200,
   marginRight: 380,
   marginTop: 50,
   marginBottom: 50,
@@ -58,7 +58,7 @@ class Registration extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{backgroundImage: "url(" + "https://www-static-blogs.operacdn.com/multi/wp-content/uploads/sites/2/2015/02/Girl_laptop.jpg" + ")" }}>
         <Paper style={style} zDepth={2}>
           <h1 style={style1}><center>Sign Up</center></h1>
           <TextField hintText="First name" floatingLabelText="First name" onChange={e=>{this.setState({fname:e.target.value})}}/>

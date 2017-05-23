@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 injectTapEventPlugin();
 
 let hasToken = () =>{
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('jwtToken');
   return (token == undefined);
 }
 
@@ -26,10 +26,10 @@ class App extends Component {
             <Route exact path="/login" component={Login}/>
             <Route exact path="/signup" component={Registration}/>
             <Navigation>
-              <Route exact path="/chat" component={Chat}/>
-              <Route exact path="/account" component={Account}/>
-              {/* <Route exact path="/chat" render={() => (hasToken() ? (<Redirect to="/login"/>) : (<Chat />))}/>
-              <Route exact path="/account" render={() => (hasToken() ? (<Redirect to="/login"/>) : (<Account />))}/> */}
+              {/* <Route exact path="/chat" component={Chat}/>
+              <Route exact path="/account" component={Account}/> */}
+              <Route exact path="/chat" render={() => (hasToken() ? (<Redirect to="/login"/>) : (<Chat />))}/>
+              <Route exact path="/account" render={() => (hasToken() ? (<Redirect to="/login"/>) : (<Account />))}/>
             </Navigation>
           </Switch>
         </Router>

@@ -10,10 +10,9 @@ module.exports = function (io,app) {
         // Event for user connecting to socket
         socket.on('online', (data) => {
             socket.name = data.username;
-            onlineUsers.push(data);
+            onlineUsers.push(data.username);
             sockets[data.username] = socket;
-            socket.join('Group');
-            socket.emit('online', data);
+            // socket.emit('online', data);
             console.log('online');
         });
 

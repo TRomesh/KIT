@@ -1,6 +1,7 @@
 import { SIGN_UP_REQUEST, SIGN_IN_REQUEST, GET_USER_DETAILS, UPDATE_USER_DETAILS } from '../constants/user';
 
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 export const signUp=(userdata)=>{
 
@@ -28,6 +29,7 @@ export const signIn=(credentials)=>{
       .then((data)=>{
         console.log('token recived from server',data.data);
         localStorage.setItem('jwtToken', data.data.token);
+        localStorage.setItem('usr', jwtDecode(data.data.token).usr);
         return ({
             type: SIGN_IN_REQUEST,
             data:data.data

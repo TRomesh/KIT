@@ -12,26 +12,28 @@ const style = {
   margin:0
 };
 
-
+const style1 = {
+  padding:0,
+  overflowY: 'hidden'
+};
 
 class Chat extends Component {
 
   render() {
     return (
-      <div >
-        <div className="container row" style={style}>
+      <div>
+        <div className="column">
             <div className="col-md-3" style={style}>
                   <Leftsidebar/>
             </div>
-            <Paper className="col-md-9" style={style}>
+            <Paper className="col-md-9" style={style1}>
                 <div>
-                  <div><Centercontainer/></div>
-                  <Divider/>
-                  <div><Messagebox/></div>
+                  <div><Centercontainer className="col-md-10"/></div>
+                  <div><Messagebox className="col-md-2"/></div>
                 </div>
             </Paper>
         </div>
-      </div>
+    </div>
     );
   }
 }

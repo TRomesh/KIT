@@ -11,45 +11,48 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import TextField from 'material-ui/TextField';
 import Dropzone from 'react-dropzone'
 import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
+import PropTypes from 'prop-types';
+import {List, ListItem, makeSelectable} from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
+import AddIcon from 'material-ui/svg-icons/content/add';
 
-const style1 = {
+let SelectableList = makeSelectable(List);
+
+const stylePaper = {
   height: 350,
-  width: 1000,
-  marginTop: 20,
-  marginBottom:20,
-  marginLeft:80,
-  padding: 7,
+  width: 850,
+  marginTop: 25,
+  marginLeft:25,
 };
 
-const style2 = {
+const proPicStyle = {
+  width: 220,
+  height: 270,
+  marginTop: 40,
+  marginLeft: 10,
+};
+
+const dropZoneStyle = {
+  width: 220,
+  height: 270,
+};
+
+const styleTexts = {
   paddingTop: 50,
 };
 
-const style3 = {
-  marginTop: 50,
+const styleFonts = {
+  marginLeft: 20,
 };
 
-const style4 = {
-  marginLeft: 80,
-  marginTop:10,
+const styleLastname = {
+  marginLeft: 230,
 };
 
-const style5 = {
-  marginLeft: 15,
-};
-
-const style6 = {
-  marginLeft: 240,
-};
-
-const imgstyle = {
-  height: 240,
-  width: 200,
-  marginTop: 15,
-};
-
-const buttonStyle = {
-  width: 222,
+const styleGridList = {
+  marginTop: 20,
+  marginLeft: 60,
 };
 
 const styles = {
@@ -65,16 +68,13 @@ const styles = {
   },
 };
 
-const gridList = {
-    width: 220,
-    height: 270,
-    margin: 30,
-    overflowY: 'auto',
+const styleMenu = {
+  marginLeft: 65,
+  marginTop: 15,
 };
 
-const previewStyle = {
-  width: 220,
-  height: 270,
+const buttonStyle = {
+  width: 222,
 };
 
 const tilesData = [
@@ -112,6 +112,12 @@ const tilesData = [
   },
 ];
 
+const rightIcon = (
+  <IconButton>
+    <AddIcon/>
+  </IconButton>
+);
+
 class Account extends Component {
 
   constructor(props) {
@@ -123,6 +129,11 @@ class Account extends Component {
       preview: '',
       mouseover: false,
       picture: '',
+      firstname: 'Madushika',
+      lastname: 'Perera',
+      status: 'Um jZt SlmPLy & aWEsoME',
+      age: '23 years old',
+      city: 'Lives in Colombo',
     };
   }
 
@@ -165,6 +176,29 @@ class Account extends Component {
       });
   }
 
+  _cancelEditProfile = () => {
+    this.setState({
+      editingProfile: false,
+      //firstnameerr: '',
+      //lastnameerr: '',
+      //statuserr: '',
+      //ageerr: '',
+      //cityerr: '',
+    });
+  }
+
+  _showUpload = () => {
+    this.setState({
+      mouseover: true
+    });
+  }
+
+  _hideUpload = () => {
+    this.setState({
+      mouseover: false
+    });
+  }
+
   _saveImage = () => {
       // var fd = new FormData();
       // var self = this;
@@ -204,30 +238,18 @@ class Account extends Component {
       );
   }
 
-  _showUpload = () => {
-    this.setState({
-      mouseover: true
-    });
-  }
-
-  _hideUpload = () => {
-    this.setState({
-      mouseover: false
-    });
-  }
-
   _saveChanges = () => {
     // let val = true;
     // let firstname = this.refs.firstname.getValue();
     // let lastname = this.refs.lastname.getValue();
-    // let username = this.refs.username.getValue();
+    // let status = this.refs.status.getValue();
     // let age = this.refs.age.getValue();
     // let city = this.refs.city.getValue();
     //
     // let data = {
     //   firstname: firstname,
     //   lastname: lastname,
-    //   username: username,
+    //   status: status,
     //   age: age,
     //   city: city,
     // }
@@ -248,114 +270,166 @@ class Account extends Component {
     // if(val) {
     //   ProfileActions.updateChanges(data);
     //   location.reload();
+    //   this.setState({
+    //     editingProfile: false
+    //   });
     // }
-  }
 
-  _cancelEditProfile = () => {
     this.setState({
-      editingProfile: false,
-      //firstnameerr: '',
-      //lastnameerr: ''
+        editingProfile: false
     });
   }
 
   render() {
     return (
-      <div className="row">
-        <div style={style1}>
-          <Paper style={style1} zDepth={1} className="column">
+      <div>
+        <div className="column">
+          <div className="col-lg-8 row">
 
-            <div className="col-md-4">
-              {
-                this.state.editingPic ? <div className="col-sm-1 col-md-1 col-lg-1">
-                    <Dropzone onDrop={this.onDrop} multiple={false} accept="image/*">
-                        <div>Try dropping some files here, or click to select files to upload.</div>
-                        <img style={previewStyle} src={this.state.preview} />
-                    </Dropzone>
-                {this.renderSave()}
+            <Paper style={stylePaper} zDepth={1} className="column">
 
+              <div className="col-md-4">
+                {
+                  this.state.editingPic ? <div className="col-sm-1 col-md-1 col-lg-1">
+                      <Dropzone style={dropZoneStyle} onDrop={this.onDrop} multiple={false} accept="image/*">
+                          <div>Try dropping some files here, or click to select files to upload.</div>
+                          <img style={dropZoneStyle} src={this.state.preview} />
+                      </Dropzone>
+                  {this.renderSave()}
 
-                </div> : <div className="col-sm-1 col-md-1 col-lg-1">
-
+                  </div> : <div className="col-sm-1 col-md-1 col-lg-1">
                               <GridList
                                 cellHeight={200}
                               >
-                                <GridTile style={gridList}>
+                                <GridTile style={proPicStyle}>
                                   <img src={'http://aurora-awards.com/wp-content/uploads/2017/05/girls-hd-images-cute-girl-hd-wallpaper-cnmuqi.jpg'} />
                                 </GridTile>
                               </GridList>
 
-                          </div>
-               }
-            </div>
+                           </div>
+                 }
+              </div>
 
-            <div className="col-md-6" style={style2}>
+              <div className="col-md-6" style={styleTexts}>
 
-              <h2><b> {this.state.editingProfile ? <div className="col-md-1"><TextField
-                                  ref="firstname" hintText="firstname" defaultValue={this.props.firstname}
-                                  errorText={this.state.firstnameerr} />
-                            </div> : 'FirstName'}
+                  <h2><b> {this.state.editingProfile ? <div className="col-md-1"><TextField
+                                      ref="firstname" hintText="firstname" defaultValue={this.state.firstname}
+                                      errorText={this.state.firstnameerr} />
+                                </div> : this.state.firstname}
 
-                                  { ' ' }
+                                      { ' ' }
 
-                                   {this.state.editingProfile ? <div className="col-md-4" style={style6}><TextField
-                                    ref="lastname" hintText="lastname" defaultValue={this.props.lastname}
-                                    errorText={this.state.lastnameerr} />
-                            </div> : 'LastName'} </b></h2><br/>
+                                       {this.state.editingProfile ? <div className="col-md-4" style={styleLastname}><TextField
+                                        ref="lastname" hintText="lastname" defaultValue={this.state.lastname}
+                                        errorText={this.state.lastnameerr} />
+                                </div> : this.state.lastname} </b></h2>
 
 
-              <h4>{this.state.editingProfile ? <div style={style5}><TextField
-                                  ref="username" hintText="username" defaultValue={this.props.username}
-                                  errorText={this.state.usernameerr} />
-                            </div> : 'Username'}</h4>
+                  <h5>{this.state.editingProfile ? <div style={styleFonts}><TextField
+                                      ref="status" hintText="status" defaultValue={this.state.status}
+                                      errorText={this.state.statuserr} fullWidth={true}/>
+                                </div> : this.state.status}</h5>
 
-              <h4>{this.state.editingProfile ? <div style={style5}><TextField
-                                  ref="age" hintText="age" defaultValue={this.props.age}
-                                  errorText={this.state.ageerr} />
-                            </div> : 'age'}</h4>
+                  <h5>{this.state.editingProfile ? <div style={styleFonts}><TextField
+                                      ref="age" hintText="age" defaultValue={this.state.age}
+                                      errorText={this.state.ageerr} />
+                                </div> : this.state.age}</h5>
 
-              <h4>{this.state.editingProfile ? <div style={style5}><TextField
-                                  ref="city" hintText="city" defaultValue={this.props.city}
-                                  errorText={this.state.cityerr} />
-                            </div> : 'city'}</h4>
+                  <h5>{this.state.editingProfile ? <div style={styleFonts}><TextField
+                                      ref="city" hintText="city" defaultValue={this.state.city}
+                                      errorText={this.state.cityerr} />
+                                </div> : this.state.city}</h5>
 
-              <div>{this.state.editingProfile ? <div style={style5}><RaisedButton
-                                  label="Save" primary={true} onTouchTap={this._saveChanges}/>
-                            </div> : ''}</div>
+                  <div>{this.state.editingProfile ? <div style={styleFonts}><RaisedButton
+                                      label="Save" primary={true} onTouchTap={this._saveChanges}/>
+                                </div> : ''}</div>
 
-            </div>
+              </div>
 
-            <div className="col-md-2">
-              <IconMenu
-                iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-                anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-                targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                style={style4}
+              <div className="col-md-2">
+                <IconMenu
+                  iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+                  anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                  targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                  style={styleMenu}
+                  >
+                  <MenuItem primaryText="Change profile picture" onTouchTap={this._editProfilePic} />
+                  <MenuItem primaryText="Edit profile" onTouchTap={this._editProfile} />
+                </IconMenu>
+              </div>
+
+            </Paper>
+
+            <div style={styleGridList}>
+              <div style={styles.root}>
+                <GridList
+                  cellHeight={180}
+                  style={styles.gridList}
+                  cols={4}
                 >
-                <MenuItem primaryText="Edit" onTouchTap={this._editProfile}/>
-              </IconMenu>
+                  <Subheader><h3><b>My Friends</b></h3></Subheader>
+                  {tilesData.map((tile) => (
+                    <GridTile
+                      key={tile.img}
+                      title={<a>{tile.title}</a>}
+                    >
+                      <img src={tile.img} />
+                    </GridTile>
+                  ))}
+                </GridList>
+              </div>
             </div>
 
-          </Paper>
-        </div>
+          </div>
+          <div className="col-lg-4">
+            <Paper zDepth={1} style={{marginLeft:75,marginTop:25}}>
+              <SelectableList defaultValue={3}>
+                <Subheader><b>KIT Connectors</b></Subheader>
+                <ListItem
+                  value={1}
+                  primaryText="Brendan Lim"
+                  leftAvatar={<Avatar src="https://www.trickscity.com/wp-content/uploads/2016/11/Best-Zayn-Malik-Haircuts-Image-2016-For-Stylish-Boys-1.jpg" />}
+                  rightIconButton={rightIcon}
+                />
+                <ListItem
+                  value={2}
+                  primaryText="Kerem Suer"
+                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
+                  rightIconButton={rightIcon}
+                />
+                <ListItem
+                  value={3}
+                  primaryText="Eric Hoffman"
+                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
+                  rightIconButton={rightIcon}
+                />
+                <ListItem
+                  value={4}
+                  primaryText="Raquel Parrado"
+                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
+                  rightIconButton={rightIcon}
+                />
+                <ListItem
+                  value={4}
+                  primaryText="Raquel Parrado"
+                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
+                  rightIconButton={rightIcon}
+                />
+                <ListItem
+                  value={4}
+                  primaryText="Raquel Parrado"
+                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
+                  rightIconButton={rightIcon}
+                />
+                <ListItem
+                  value={4}
+                  primaryText="Raquel Parrado"
+                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
+                  rightIconButton={rightIcon}
+                />
 
-        <div style={style3}>
-          <div style={styles.root}>
-            <GridList
-              cellHeight={180}
-              style={styles.gridList}
-              cols={4}
-            >
-              <Subheader><h3><b>Friend List</b></h3></Subheader>
-              {tilesData.map((tile) => (
-                <GridTile
-                  key={tile.img}
-                  title={<a>{tile.title}</a>}
-                >
-                  <img src={tile.img} />
-                </GridTile>
-              ))}
-            </GridList>
+              </SelectableList>
+            </Paper>
           </div>
         </div>
       </div>

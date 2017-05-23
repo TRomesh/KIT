@@ -16,7 +16,8 @@ import NewMessage from 'material-ui/svg-icons/communication/message';
 const style = {
   padding:0,
   height:500,
-  overflow:'auto'
+  overflowY: 'visible',
+  overflowX: 'hidden'
 };
 
   let messages = [
@@ -84,7 +85,7 @@ class Leftsidebar extends Component {
     ];
     return (
     <Paper>
-       <List>
+       <List style={{padding:0}}>
          <Subheader className="row">
            <strong className="col-md-10">Recent chats</strong>
            <div className="col-md-2">
