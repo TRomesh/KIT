@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Paper from 'material-ui/Paper';
 import PropTypes from 'prop-types';
-import {signUp} from '../../actions/UserActions';
+import {signUp} from '../../actions/AuthAction';
 import {blueGrey50,lightBlue500} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import * as AuthActions from '../../actions/AuthAction';
 
 const style = {
   height: 554,
@@ -37,7 +40,8 @@ class Registration extends Component {
          lname:'',
          uname:'',
          email:'',
-         password:''
+         password:'',
+         loading:false
        }
   }
 
@@ -52,7 +56,13 @@ class Registration extends Component {
   };
 
   singup=()=>{
-    signUp(this.state);
+    this.props.actions.signUn({
+      fname:this.state.fname,
+      lname:this.state.lname,
+      uname:this.state.uname,
+      email:this.state.email,
+      password:this.state.password
+    });
     this.setState({fname:'',lname:'',uname:'',email:'',password:''});
   }
 
@@ -75,7 +85,20 @@ class Registration extends Component {
 }
 
 Registration.PropTypes = {
-  signUp:PropTypes.func
+  isError: PropTypes.bool.isRequired,
+  actions: PropTypes.object.isRequired
 }
 
-export default connect(null, { signUp })(Registration);
+let mapStateToProps = (state,props) => {
+  return {
+    isError: state.user
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    actions:bindActionCreators(AuthActions,dispatch)
+  };
+}
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Registration));

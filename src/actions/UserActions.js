@@ -1,76 +1,72 @@
-import { SIGN_UP_REQUEST, SIGN_IN_REQUEST, GET_USER_DETAILS, UPDATE_USER_DETAILS } from '../constants/user';
-
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { GET_USER_DETAILS, UPDATE_USER_DETAILS, ADD_FRIENDS, REMOVE_FRIENDS } from '../constants/user';
 
-export const signUp=(userdata)=>{
 
-    axios.post('http://localhost:3030/signup',
-        userdata
-      )
-      .then((data)=>{
-        return ({
-            type: SIGN_UP_REQUEST,
-            data:data
-        });
-      })
-      .catch((error)=>{
-        console.log('err', error);
-      });
+function getUserData(data) {
+  return {
+      type: GET_USER_DETAILS,
+      data
+  };
 }
 
+function updateUserData(data) {
+  return {
+      type: UPDATE_USER_DETAILS,
+      data
+  };
+}
 
-export const signIn=(credentials)=>{
-  console.log('data came to action from ui',credentials);
+function addFriends(data) {
+  return {
+      type: ADD_FRIENDS,
+      data
+  };
+}
 
-    axios.post('http://localhost:3030/signin',
-        credentials
-      )
-      .then((data)=>{
-        console.log('token recived from server',data.data);
-        localStorage.setItem('jwtToken', data.data.token);
-        localStorage.setItem('usr', jwtDecode(data.data.token).usr);
-        return ({
-            type: SIGN_IN_REQUEST,
-            data:data.data
-        });
-      })
-      .catch((error)=>{
-        console.log('err', error);
-      });
+function removeFriends(data) {
+  return {
+      type: REMOVE_FRIENDS,
+      data
+  };
 }
 
 export const getUserDetails=(email)=>{
-
-    axios.get('http://localhost:3030/user',
-        email
-      )
-      .then((data)=>{
-        console.log(data);
-        return ({
-            type: GET_USER_DETAILS,
-            user:data.data
-        });
-      })
-      .catch((error)=>{
-        console.log('err', error);
-      });
+  return (dispatch) => {
+    return axios.post('http://localhost:3030/user',email).then((data)=>{
+                dispatch(getUserData(data));
+            }).catch((error)=>{
+                dispatch(signupFail(error));
+            });
+        };
 }
 
-
 export const updateUserDetails=(user)=>{
+  return (dispatch) => {
+    return axios.put('http://localhost:3030/user',user).then((data)=>{
+                dispatch(updateUserData(data));
+            }).catch((error)=>{
+                dispatch(signupFail(error));
+            });
+        };
+}
 
-    axios.put('http://localhost:3030/user',
-        user
-      )
-      .then((data)=>{
-        console.log(data);
-        return ({
-            type: UPDATE_USER_DETAILS,
-            user:data.data
-        });
-      })
-      .catch((error)=>{
-        console.log('err', error);
-      });
+export const addFriend=(user)=>{
+  return (dispatch) => {
+    return axios.put('http://localhost:3030/user',user).then((data)=>{
+                dispatch(addFriends(data));
+            }).catch((error)=>{
+                dispatch(signupFail(error));
+            });
+        };
+}
+
+export const removeFriend=(user)=>{
+  return (dispatch) => {
+    return axios.put('http://localhost:3030/user',user).then((data)=>{
+                dispatch(removeFriends(data));
+            }).catch((error)=>{
+                dispatch(signupFail(error));
+            });
+        };
 }

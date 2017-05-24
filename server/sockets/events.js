@@ -46,13 +46,9 @@ module.exports = function (io,app) {
 
         // Event for user sending new message
         socket.on('new message', (data) => {
-            if (!data.private) {
-                socket.broadcast.to(data.target).emit('new message', data);
-            } else {
-                if (sockets[data.target]) {
-                    sockets[data.target].emit('new message', data);
-                }
-            }
+
+          socket.to('sender').emit(data);
+          socket.to('reciver').emit(data);
             console.log('new msg');
         });
 

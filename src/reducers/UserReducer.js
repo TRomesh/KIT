@@ -1,25 +1,26 @@
-import { SIGN_UP_REQUEST, SIGN_IN_REQUEST} from '../constants/user';
+import 'babel-polyfill';
+import { SIGN_UP_SUCCESS, SIGN_IN_SUCCESS, SIGN_UP_FAIL, SIGN_IN_FAIL } from '../constants/user';
 
 const initialState = {
-  isLogin: false,
-  isRegistered: false,
-  authorizationPending: false,
-  registrationPending: false,
-  user: null
+  loading: false,
+  isError: true
 };
+
 
 export default function User(state = initialState, action) {
   switch (action.type) {
-    case SIGN_UP_REQUEST:
-      return {
-        ...state,
-        registrationPending: true
-      };
-    case SIGN_IN_REQUEST:
-      return {
-        ...state,
-        authorizationPending: action.payload
-      };
+    case SIGN_UP_SUCCESS:
+      return Object.assign({},state,{isError:false});
+
+    case SIGN_IN_SUCCESS:
+      return Object.assign({},state,{isError:false});
+
+    case SIGN_UP_FAIL:
+      return Object.assign({},state,{isError:true});
+
+    case SIGN_IN_FAIL:
+      return Object.assign({},state,{isError:true});
+
     default:
       return state;
   }

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom'
+import {bindActionCreators} from 'redux';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {signIn} from '../../actions/UserActions';
+import * as AuthActions from '../../actions/AuthAction';
 import {blueGrey50,lightBlue500} from 'material-ui/styles/colors';
 
 const style = {
@@ -33,21 +35,20 @@ class Login extends Component {
       super(props);
       this.state = {
         email: '',
-        password: '',
-        loading:false
+        password: ''
       };
 
     }
 
     singin=()=>{
-        console.log('signing in');
-      this.setState({loading:true});
-      signIn({email:this.state.email,password:this.state.password});
+      console.log('signing in');
+      this.props.actions.signIn({email:this.state.email,password:this.state.password});
       this.setState({email: '',password: '',loading:true});
       console.log('done sending to actions');
     }
 
     render() {
+      console.log(this.props.isError);
       return (
         <div style={{backgroundImage: "url(" + "https://addmeskype.files.wordpress.com/2015/09/d62cb-teenagers-offlinle-online.jpg" + ")",
                      width:1301, height:654}}>
@@ -64,9 +65,20 @@ class Login extends Component {
 }
 
 Login.PropTypes = {
-  signIn:PropTypes.func
+  isError: PropTypes.bool.isRequired,
+  actions: PropTypes.object.isRequired
 }
 
+let mapStateToProps = (state,props) => {
+  return {
+    isError: state.user
+  }
+}
 
+let mapDispatchToProps = (dispatch) => {
+  return {
+    actions:bindActionCreators(AuthActions,dispatch)
+  };
+}
 
-export default connect(null, { signIn })(Login);
+export default  withRouter(connect(mapStateToProps,mapDispatchToProps)(Login));
