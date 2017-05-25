@@ -1,25 +1,41 @@
 import 'babel-polyfill';
-import { SIGN_UP_SUCCESS, SIGN_IN_SUCCESS, SIGN_UP_FAIL, SIGN_IN_FAIL } from '../constants/user';
+import * as constants from '../constants/user';
 
 const initialState = {
-  loading: false,
-  isError: true,
-  redireact:false
+  fname: '',
+  lname: '',
+  uname: '',
+  status: '',
+  age: '',
+  city: '',
+  picture: ''
 };
 
 
 export default function User(state = initialState, action) {
   switch (action.type) {
-    case SIGN_UP_SUCCESS:
+    case constants.SIGN_UP_SUCCESS:
       return Object.assign({},state,{isError:false,redireact:true});
 
-    case SIGN_IN_SUCCESS:
+    case constants.SIGN_IN_SUCCESS:
       return Object.assign({},state,{isError:false,redireact:true});
 
-    case SIGN_UP_FAIL:
+    case constants.SIGN_UP_FAIL:
       return Object.assign({},state,{isError:true});
 
-    case SIGN_IN_FAIL:
+    case constants.SIGN_IN_FAIL:
+      return Object.assign({},state,{isError:true});
+
+    case constants.GET_USERS:
+      return Object.assign({},state,{isError:true});
+
+    case constants.GET_USER_DETAILS:
+      return Object.assign({},state,{isError:true});
+
+    case constants.UPDATE_USER_DETAILS:
+      return Object.assign({},state,{isError:true});
+
+    case constants.ADD_FRIENDS:
       return Object.assign({},state,{isError:true});
 
     default:

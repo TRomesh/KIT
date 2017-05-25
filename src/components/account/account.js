@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom'
+import {bindActionCreators} from 'redux';
 import Paper from 'material-ui/Paper';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {GridList, GridTile} from 'material-ui/GridList';
@@ -12,9 +16,10 @@ import TextField from 'material-ui/TextField';
 import Dropzone from 'react-dropzone'
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
-import PropTypes from 'prop-types';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
+import * as UserActions from '../../actions/UserActions';
+import * as UploadActions from '../../actions/UploadAction';
 import AddIcon from 'material-ui/svg-icons/content/add';
 
 let SelectableList = makeSelectable(List);
@@ -112,11 +117,6 @@ const tilesData = [
   },
 ];
 
-const rightIcon = (
-  <IconButton>
-    <AddIcon/>
-  </IconButton>
-);
 
 class Account extends Component {
 
@@ -280,6 +280,36 @@ class Account extends Component {
     });
   }
 
+  addfriend=(user)=>{
+    console.log(user);
+  }
+
+  UserList=()=>{
+    return this.props.users.map((user,index)=>{
+      return  <ListItem value={index}
+               primaryText={user.fname+''+user.lname}
+               leftAvatar={<Avatar src={user.uname} />}
+               rightIconButton={<IconButton><AddIcon OnTouchTap={()=>{this.addfriend(user.uname)}}/></IconButton>}/>
+    });
+  }
+
+  MyFriends=()=>{
+     return this.props.users.map((user,index)=>{
+      return  <GridTile key={index} title={<a>{user.fname+''+user.lname}</a>}>
+                <img src={user.uname} />
+              </GridTile>
+   });
+ }
+
+ handleFileUpload=()=>{
+ // handleFileUpload=({ file })=>{
+  // const file = files[0];
+  // this.props.uploadactions.uploadRequest({
+  //    file,
+  //    name: 'Awesome Cat Pic'
+  // })
+ }
+
   render() {
     return (
       <div>
@@ -313,16 +343,16 @@ class Account extends Component {
               <div className="col-md-6" style={styleTexts}>
 
                   <h2><b> {this.state.editingProfile ? <div className="col-md-1"><TextField
-                                      ref="firstname" hintText="firstname" defaultValue={this.state.firstname}
+                                      ref="fname" hintText="firstname" defaultValue={this.state.fname}
                                       errorText={this.state.firstnameerr} />
-                                </div> : this.state.firstname}
+                                </div> : this.state.fname}
 
                                       { ' ' }
 
                                        {this.state.editingProfile ? <div className="col-md-4" style={styleLastname}><TextField
-                                        ref="lastname" hintText="lastname" defaultValue={this.state.lastname}
+                                        ref="lname" hintText="lastname" defaultValue={this.state.lname}
                                         errorText={this.state.lastnameerr} />
-                                </div> : this.state.lastname} </b></h2>
+                                </div> : this.state.lname} </b></h2>
 
 
                   <h5>{this.state.editingProfile ? <div style={styleFonts}><TextField
@@ -368,14 +398,9 @@ class Account extends Component {
                   cols={4}
                 >
                   <Subheader><h3><b>My Friends</b></h3></Subheader>
-                  {tilesData.map((tile) => (
-                    <GridTile
-                      key={tile.img}
-                      title={<a>{tile.title}</a>}
-                    >
-                      <img src={tile.img} />
-                    </GridTile>
-                  ))}
+                  {
+                    this.MyFriends()
+                  }
                 </GridList>
               </div>
             </div>
@@ -385,49 +410,9 @@ class Account extends Component {
             <Paper zDepth={1} style={{marginLeft:75,marginTop:25}}>
               <SelectableList defaultValue={3}>
                 <Subheader><b>KIT Connectors</b></Subheader>
-                <ListItem
-                  value={1}
-                  primaryText="Brendan Lim"
-                  leftAvatar={<Avatar src="https://www.trickscity.com/wp-content/uploads/2016/11/Best-Zayn-Malik-Haircuts-Image-2016-For-Stylish-Boys-1.jpg" />}
-                  rightIconButton={rightIcon}
-                />
-                <ListItem
-                  value={2}
-                  primaryText="Kerem Suer"
-                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
-                  rightIconButton={rightIcon}
-                />
-                <ListItem
-                  value={3}
-                  primaryText="Eric Hoffman"
-                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
-                  rightIconButton={rightIcon}
-                />
-                <ListItem
-                  value={4}
-                  primaryText="Raquel Parrado"
-                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
-                  rightIconButton={rightIcon}
-                />
-                <ListItem
-                  value={4}
-                  primaryText="Raquel Parrado"
-                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
-                  rightIconButton={rightIcon}
-                />
-                <ListItem
-                  value={4}
-                  primaryText="Raquel Parrado"
-                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
-                  rightIconButton={rightIcon}
-                />
-                <ListItem
-                  value={4}
-                  primaryText="Raquel Parrado"
-                  leftAvatar={<Avatar src="https://3stoogiez.com/wp-content/uploads/2015/02/Miranda-Kerr-Wallpaper-4-1024x768.jpg" />}
-                  rightIconButton={rightIcon}
-                />
-
+                {
+                  this.UserList()
+                }
               </SelectableList>
             </Paper>
           </div>
@@ -437,4 +422,24 @@ class Account extends Component {
   }
 }
 
-export default Account;
+
+Account.PropTypes = {
+  useractions: PropTypes.object.isRequired,
+  uploadactions: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+}
+
+let mapStateToProps = (state,props) => {
+  return {
+    user: state.user
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    useractions:bindActionCreators(UserActions,dispatch),
+    uploadactions:bindActionCreators(UploadActions,dispatch)
+  };
+}
+
+export default  withRouter(connect(mapStateToProps,mapDispatchToProps)(Account));

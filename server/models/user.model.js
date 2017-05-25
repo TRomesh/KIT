@@ -9,6 +9,9 @@ const User = new Schema({
   uname:{type:String,unique:true},
   email:{type:String,unique:true,lowercase:true},
   password:String,
+  status:{ type: String, default:'' },
+  age: { type: Number, default: 0 },
+  city: { type: String, default:'' },
   firends:[{uname:{type:String,unique:true}}]
 });
 

@@ -41,11 +41,9 @@ function signupFail(data) {
 
 export const signUp=(userdata)=>{
   return (dispatch) => {
-    return axios.post('http://localhost:3030/signup',userdata).then((data)=>{
-                dispatch(signupSuccess(data));
-            }).catch((error)=>{
-                dispatch(signupFail(error));
-            });
+    return axios.post('http://localhost:3030/signup',userdata)
+              .then(data => dispatch(signupSuccess(data)))
+              .catch(error => dispatch(signupFail(error)));
         };
 }
 
@@ -53,13 +51,11 @@ export const signUp=(userdata)=>{
 export const signIn=(credentials)=>{
 
  return (dispatch) => {
-    return axios.post('http://localhost:3030/signin',credentials).then((data)=>{
+    return axios.post('http://localhost:3030/signin',credentials)
+      .then((data)=>{
             setDataToLocalStorage(data);
             dispatch(signinSuccess(data));
-            console.log('dispatched!!!');
           })
-          .catch((error)=>{
-            dispatch(signinFail(error));
-          });
+       .catch(error => dispatch(signinFail(error)));
    };
 }
