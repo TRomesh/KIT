@@ -7,6 +7,7 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as AuthActions from '../../actions/AuthAction';
+import { Redirect } from 'react-router-dom';
 import {blueGrey50,lightBlue500} from 'material-ui/styles/colors';
 
 const style = {
@@ -48,7 +49,10 @@ class Login extends Component {
     }
 
     render() {
-      console.log(this.props.isError);
+        if(this.props.redireact.redireact){
+          console.log('redireact true!');
+            this.props.history.push('/chat')
+        }
       return (
         <div style={{backgroundImage: "url(" + "https://addmeskype.files.wordpress.com/2015/09/d62cb-teenagers-offlinle-online.jpg" + ")",
                      width:1301, height:654}}>
@@ -66,12 +70,14 @@ class Login extends Component {
 
 Login.PropTypes = {
   isError: PropTypes.bool.isRequired,
+  redireact: PropTypes.bool.isRequired,
   actions: PropTypes.object.isRequired
 }
 
 let mapStateToProps = (state,props) => {
   return {
-    isError: state.user
+    isError: state.user,
+    redireact: state.user
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Chat from './chat/chat';
 import Account from './account/account';
+import history from './history';
 import Login from './login/login';
 import Navigation from './navigation/navigation';
 import Registration from './registration/registration';
@@ -21,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <Router>
+        <Router history={history}>
           <Switch>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/signup" component={Registration}/>

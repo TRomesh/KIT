@@ -16,7 +16,9 @@ const socket = io.connect("http://localhost:3030");
 class Navigation extends Component {
 
   logout=()=>{
-
+    console.log('logout');
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('usr');
   }
 
   render() {
@@ -31,7 +33,6 @@ class Navigation extends Component {
              <div className="column">
                 <Link to="/chat"><FlatButton label="Home"/></Link>
                 <Link to="/account"><FlatButton label="My Profile"/></Link>
-                <Link to="/signout"><FlatButton label="Signout"/></Link>
                 <IconMenu
                   iconButtonElement={
                     <IconButton><MoreVertIcon /></IconButton>
@@ -39,8 +40,7 @@ class Navigation extends Component {
                   targetOrigin={{horizontal: 'right', vertical: 'top'}}
                   anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                 >
-                  <MenuItem primaryText="Help" />
-                  <MenuItem primaryText="Settings" />
+                  <Link to="/login"><MenuItem primaryText="logout" onTouchTap={this.logout}/></Link>
                 </IconMenu>
           </div>
            }
