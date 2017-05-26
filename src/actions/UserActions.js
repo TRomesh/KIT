@@ -2,6 +2,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import * as constants from '../constants/user';
 
+axios.defaults.headers.common['authorization'] = sessionStorage.getItem('jwtToken');
 
 function getUserData(data) {
   return {
@@ -13,6 +14,20 @@ function getUserData(data) {
 function errorgetUserData(data) {
   return {
       type: constants.GET_USER_DETAILS,
+      data
+  };
+}
+
+function getUsersData(data) {
+  return {
+      type: constants.GET_USERS,
+      data
+  };
+}
+
+function errorgetUsersData(data) {
+  return {
+      type: constants.ERROR_GET_USERS,
       data
   };
 }
@@ -57,6 +72,16 @@ function errorremoveFriends(data) {
       type: constants.GET_USER_DETAILS,
       data
   };
+}
+
+export const getUsersDetails=(uname)=>{
+  return (dispatch) => {
+    return axios.get('http://localhost:3030/users',uname).then((data)=>{
+                dispatch(getUsersData(data));
+            }).catch((error)=>{
+                dispatch(errorgetUsersData(error));
+            });
+        };
 }
 
 export const getUserDetails=(email)=>{

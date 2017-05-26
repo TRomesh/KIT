@@ -2,6 +2,8 @@ import 'babel-polyfill';
 import axios from 'axios';
 import { UPLOAD_DOCUMENT_SUCCESS, UPLOAD_DOCUMENT_FAIL } from '../constants/upload';
 
+axios.defaults.headers.common['authorization'] = sessionStorage.getItem('jwtToken');
+
 
 export function uploadSuccess({ data }) {
   return {

@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const approutes = require('./routes/AppRoutes');
 const messageroutes = require('./routes/MessageRoutes');
 const userroutes = require('./routes/UserRoutes');
-const socketevents = require('./sockets/events');
+const socketevents = require('./utils/socketevents');
 
 
 const port = process.env.PORT || 3030;

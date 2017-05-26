@@ -1,4 +1,4 @@
-import {SEND_MESSAGE, GET_MESSAGE, ROOM_USER_LIST_UPDATE} from '../constants/message';
+import {SEND_MESSAGE, GET_MESSAGE, ROOM_USER_LIST_UPDATE, FAIL_GET_MESSAGE, FAIL_SEARCH_MESSAGE } from '../constants/message';
 
 const initialState = {
   messages: []
@@ -24,6 +24,16 @@ export default function Chat(state = initialState, action) {
 
       };
     case ROOM_USER_LIST_UPDATE:
+      return {
+        ...state,
+        roomUserList: action.payload
+      };
+    case FAIL_GET_MESSAGE:
+      return {
+        ...state,
+        roomUserList: action.payload
+      };
+    case FAIL_SEARCH_MESSAGE:
       return {
         ...state,
         roomUserList: action.payload

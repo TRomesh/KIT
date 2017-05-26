@@ -1,5 +1,6 @@
-const Chat = require('../models/chat.model');
+const Message = require('../models/message.model');
 const Thread = require('../models/thread.model');
+const User = require('../models/user.model');
 let onlineUsers = [];
 let sockets = {};
 
@@ -47,8 +48,14 @@ module.exports = function (io,app) {
         // Event for user sending new message
         socket.on('new message', (data) => {
 
-          socket.to('sender').emit(data);
-          socket.to('reciver').emit(data);
+          socket.to('sender').emit(data.message);
+          socket.to('reciver').emit(data.message);
+          let message = new Message({
+            sender:'',
+            thread:'',
+            message:data.message
+          });
+          message.save();
             console.log('new msg');
         });
 
